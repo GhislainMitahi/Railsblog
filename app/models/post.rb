@@ -1,7 +1,8 @@
-class Post < ApplicationRecord
+class PostModel < ApplicationRecord
   has_many :comments, class_name: 'Comment', foreign_key: 'post_id', dependent: :destroy
   has_many :likes, class_name: 'Like', foreign_key: 'post_id', dependent: :destroy
-  belongs_to :user, class_name: 'User', foreign_key: 'user_id'
+  belongs_to :author, class_name: 'User'
+  after_save :update_posts_counter
 
   private
 
