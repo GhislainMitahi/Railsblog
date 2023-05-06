@@ -1,17 +1,22 @@
-class PostModel < ApplicationRecord
-  has_many :comments, class_name: 'Comment', foreign_key: 'post_id', dependent: :destroy
-  has_many :likes, class_name: 'Like', foreign_key: 'post_id', dependent: :destroy
+class Post < ApplicationRecord
   belongs_to :author, class_name: 'User'
-  after_save :update_posts_counter
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+
+  validates :title, presence: true, length: { maximum: 250 }
+  validates :text, presence: true
+  validates :comments_counter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :likes_counter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
+  after_save :update_user_posts_counter
+
+  def recent_comments(limit = 5)
+    comments.order(created_at: :desc).limit(limit)
+  end
 
   private
 
-  def update_counter
-    count_posts = Post.where(user_id: user_id).count
-    User.find_by(id: user_id).update(postsCounter: count_posts)
-  end
-
-  def recent_comments()
-    comments.last(5)
+  def update_user_posts_counter
+    author.update(posts_counter: author.posts.count)
   end
 end
