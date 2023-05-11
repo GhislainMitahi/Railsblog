@@ -1,0 +1,4 @@
+<h1>Profile for <%= @user.name %></h1>
+<h3><%= @user.bio %></h3>
+<p><%= link_to 'View posts', user_posts_path(@user) %></p>
+<p><%= link_to 'Back to home', root_path %></p>
