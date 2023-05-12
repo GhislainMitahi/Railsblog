@@ -1,7 +1,49 @@
-<h1>Posts by <%= @user.name %></h1>
-<ul>
-  <% @posts.each do |post| %>
-    <li><%= link_to post.title, user_post_path(@user, post) %></li>
+<%# Profile banner %>
+<div class="flex mt-4 space-x-3">
+
+  <%= link_to user_path(@user.id) do %>
+    <p class="border-2"><%= image_tag(@user.photo, size: "76x76", alt: "robohash generated avatar") %></p>
+  <% end %>
+
+  <div class="flex flex-col justify-center border-2 pl-3 h-20 grow">
+    <p class="text-xl"><%= link_to @user.name, user_path(@user.id) %></p>
+    <p class="self-end text-sm pr-2"><%= link_to "Number of posts: #{@user.posts.count}", user_posts_path(@user.id) %></p>
+  </div>
+
+</div>
+
+<%# Posts listing %>
+<ul class="space-y-3 mt-3 mb-4">
+  <% @user.posts.each_with_index do |post, index| %>
+    <li class="border-2 p-2" >
+      <%# Post %>
+      <div class="flex flex-col">
+        <%# render Post number # %>
+        <p class="text-sm mb-2 font-semibold"><%= "Post ##{index + 1}" %></p>
+        <p class="text-xl mb-2"><%= link_to post.title, user_post_path(@user, post) %></p>
+        <p><%= post.text %></p>
+        <div class="flex mt-2 space-x-1 self-end">
+          <p class="text-xs"><%= "Number of comments: #{post.comments.count}," %></p>
+          <p class="text-xs"><%= "Number of likes: #{post.likes.count}" %></p>
+        </div>
+      </div>
+      <%# Comments for post %>
+      <div class="mt-2">
+        <h3 class="text-xl mb-2">Comments</h3>
+        <ul class="space-y-2">
+          <% post.comments.each do |comment| %>
+            <li class="flex space-x-1">
+              <p class="text-sm font-semibold"><%= "#{comment.author.name}:" %></p>
+              <p class="text-sm"><%= comment.text %></p>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </li>
   <% end %>
 </ul>
-<p><%= link_to 'Back to profile', user_path(@user) %></p>
+
+<div class="flex space-x-2 my-3">
+  <a href="<%= user_path(@user.id) %>" class="border-2 w-full text-xl p-2">Back to profile</a>
+  <a href="<%= root_path %>" class="border-2 w-full text-xl p-2">Back to users</a>
+</div>
