@@ -1,4 +1,38 @@
-<h1>Profile for <%= @user.name %></h1>
-<h3><%= @user.bio %></h3>
-<p><%= link_to 'View posts', user_posts_path(@user) %></p>
-<p><%= link_to 'Back to home', root_path %></p>
+<div class="flex mt-4 space-x-3">
+
+  <p class="border-2"><%= image_tag(@user.photo, size: "76x76", alt: "robohash generated avatar") %></p>
+  
+  <div class="flex flex-col justify-center border-2 pl-3 h-20 grow">
+    <p class="text-xl"><%= @user.name %></p>
+    <p class="self-end text-sm pr-2"><%= link_to "Number of posts: #{@user.posts.count}", user_posts_path(@user.id) %></p>
+  </div>
+
+</div>
+
+<%# Bio %>
+<div class="border-2 p-2 my-3">
+  <h3 class="text-xl mb-2">Bio</h3>
+  <p><%= @user.bio %></p>
+</div>
+
+<%# 3 first posts %>
+<ul class="space-y-3">
+  <% @user.posts.take(3).each_with_index do |post, index| %>
+    <li class="border-2 flex flex-col p-2" >
+      <p class="text-sm mb-2 font-semibold"><%= "Post ##{index + 1}" %></p>
+      <p class="text-xl mb-2"><%= link_to post.title, user_post_path(@user, post) %></p>
+      <p><%= post.text %></p>
+      <div class="flex mt-2 space-x-1 self-end">
+        <p class="text-xs"><%= "Number of comments: #{post.comments.count}," %></p>
+        <p class="text-xs"><%= "Number of likes: #{post.likes.count}" %></p>
+      </div>
+
+    </li>
+  <% end %>
+</ul>
+
+
+<div class="flex space-x-2 my-3">
+  <a href="<%= user_posts_path(@user.id) %>" class="border-2 w-full text-xl p-2">See all posts</a>
+  <a href="<%= root_path %>" class="border-2 w-full text-xl p-2">Back to users</a>
+</div>

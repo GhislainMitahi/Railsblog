@@ -1,3 +1,28 @@
-<h1><%= @post.title %></h1>
-<p><%= @post.text %></p>
-<p><%= link_to 'Back to posts', user_posts_path(@user) %></p>
+<div class="border-2 p-2" >
+  <%# Post %>
+  <div class="flex flex-col">
+    <p class="text-xl mb-2"><%= @post.title %></p>
+    <p><%= @post.text %></p>
+    <div class="flex mt-2 space-x-1 self-end">
+      <p class="text-xs"><%= "Number of comments: #{@post.comments.count}," %></p>
+      <p class="text-xs"><%= "Number of likes: #{@post.likes.count}" %></p>
+    </div>
+  </div>
+  <%# Comments for post %>
+  <div class="mt-2">
+    <h3 class="text-xl mb-2">Comments</h3>
+    <ul class="space-y-2">
+      <% @post.comments.each do |comment| %>
+        <li class="flex space-x-1">
+          <p class="text-sm font-semibold"><%= "#{comment.author.name}:" %></p>
+          <p class="text-sm"><%= comment.text %></p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="flex space-x-2 my-3">
+  <a href="<%= user_posts_path(@user.id) %>" class="border-2 w-full text-xl p-2">See all posts</a>
+  <a href="<%= user_path(@user.id) %>" class="border-2 w-full text-xl p-2">Back to profile</a>
+</div>
