@@ -12,6 +12,11 @@
 
 </div>
 
+<%# Link to new post %>
+<div class="flex space-x-2 my-3">
+  <a href="<%= new_user_post_path(@user.id) %>" class="border-2 w-full text-xl p-2">Create New Post</a>
+</div>
+
 <%# Posts listing %>
 <ul class="space-y-3 mt-3 mb-4">
   <% @user.posts.each_with_index do |post, index| %>
@@ -27,11 +32,11 @@
           <p class="text-xs"><%= "Number of likes: #{post.likes.count}" %></p>
         </div>
       </div>
-      <%# recent_Comments for post %>
+      <%# Comments for post %>
       <div class="mt-2">
         <h3 class="text-xl mb-2">Comments</h3>
         <ul class="space-y-2">
-          <% post.recent_comments.each do |comment| %>
+          <% post.comments.each do |comment| %>
             <li class="flex space-x-1">
               <p class="text-sm font-semibold"><%= "#{comment.author.name}:" %></p>
               <p class="text-sm"><%= comment.text %></p>
