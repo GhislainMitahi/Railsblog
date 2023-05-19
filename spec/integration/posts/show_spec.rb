@@ -19,7 +19,6 @@ RSpec.describe 'GET /posts/:id', type: :system do
     Comment.create(post_id: post.id, author_id: user2.id, text: 'Comment 1')
   end
 
-
   before(:each) do
     visit user_post_path(user1, post)
     wait_for_page_to_load
