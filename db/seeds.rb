@@ -8,7 +8,7 @@
   end
   
   # Create 50 posts with randomized data
-  50.times do
+  2.times do
     Post.create!(
       title: Faker::Lorem.sentence(word_count: 3),
       text: Faker::Lorem.paragraph(sentence_count: 10),
@@ -26,7 +26,7 @@
   end
   
   # Create 200 likes with randomized data
-  10.times do
+  3.times do
     user = User.order(Arel.sql('RANDOM()')).first
     post = Post.order(Arel.sql('RANDOM()')).first
     # But only if the user hasn't liked the post yet
