@@ -11,7 +11,6 @@ RSpec.describe 'GET /users', type: :system do
                 bio: 'Teacher from Canada.')
   end
 
-
   it 'should display the username of all other users' do
     visit '/users'
     expect(page).to have_content(user1.name)
