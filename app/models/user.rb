@@ -14,7 +14,7 @@ class User < ApplicationRecord
     likes.find_by(post_id: post.id)
   end
 
-  def recent_posts(limit = 3)
-    posts.order(created_at: :desc).limit(limit)
+  def recent_posts
+    posts.order(created_at: :desc).limit(3)
   end
 end
