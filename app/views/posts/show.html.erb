@@ -1,7 +1,7 @@
 <div class="border-2 p-2" >
   <%# Post %>
   <div class="flex flex-col">
-    <p class="text-xl mb-2"><%= @post.title %></p>
+    <p class="text-xl mb-2"><%= @post.title %> by <%= @user.name %></p>
     <p><%= @post.text %></p>
     <div class="flex mt-2 space-x-1 self-end">
       <p class="text-xs"><%= "Number of comments: #{@post.comments.count}," %></p>
