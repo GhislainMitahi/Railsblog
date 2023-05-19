@@ -23,7 +23,6 @@ RSpec.describe 'GET /users/:id', type: :system do
     end
   end
 
-
   it 'should display the user\'s profile picture' do
     expect(page).to have_css("img[src*='https://images.unsplash.com/photo-1461948573049-a5ab4efb6150?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdl']")
   end
