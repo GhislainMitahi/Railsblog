@@ -1,5 +1,17 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'capybara'
+require 'capybara/rspec'
+require 'selenium-webdriver'
+
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.default_driver = :selenium
+Capybara.javascript_driver = :selenium
+Capybara.default_max_wait_time = 10
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production

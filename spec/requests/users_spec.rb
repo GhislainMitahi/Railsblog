@@ -22,7 +22,7 @@ describe 'Users', type: :request do
 
     it 'includes the correct placeholder text in the response body' do
       get users_path
-      expect(response.body).to include('All Users')
+      expect(response.body).to include(user.name)
     end
   end
 
