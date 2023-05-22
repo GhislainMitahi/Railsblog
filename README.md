@@ -30,8 +30,6 @@
 
 # 📖 Railsblog <a name="about-project"></a>
 
-> Describe your project in 1 or 2 sentences.
-
 **Railsblog** is a web app that will show the list of posts and empower readers to interact with them by adding comments and liking posts.
 
 ## 🛠 Built With <a name="built-with"></a>

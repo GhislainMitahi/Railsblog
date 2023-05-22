@@ -13,6 +13,18 @@
 
   <body>
     <main class="container mx-auto mt-8 pl-5 pr-6">
+      <div class="hide flex justify-center">
+        <p class="notice  flex items-center bg-blue-500 text-white text-sm font-bold" role="alert"><%= notice %></p>
+        <p class="alert  flex items-center bg-red-500 text-white text-sm font-bold" role="alert"><%= alert %></p>
+      </div>
+      <% if current_user %>
+      <%= button_to(
+        "Log Out",
+        destroy_user_session_path,
+        method: :delete,
+        class: 'text-white bg-red-600 p-2 rounded-sm mt-2'
+      ) %>
+      <%end%> 
       <%= yield %>
     </main>
   </body>
